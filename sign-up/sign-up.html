@@ -1,0 +1,45 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="sign-up.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        <title>Registration Form</title>
+    </head>
+    <body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form id="myForm">
+            <div class="form-group">
+            <label="username">Username</label><br><br>
+            <input type="text" placeholder="Enter username" id="username"><br><br>
+            <span id="usernameError" class="error"></span>
+            </div>
+            <div class="form-group">
+            <label="email">Email</label><br><br>
+            <input type="email" placeholder="Enter email" id="email"><br><br>
+            <span id="emailError" class="error"></span>
+            </div>
+            <div class="form-group">
+            <label="password">Password</label><br><br>
+            <div class="password-container">
+            <input type="password" placeholder="Enter password" id="password"><i class="fa-solid fa-eye" id="togglePassword"></i>
+            </div><br><br>
+            <span id="passwordError" class="error"></span>
+            </div>
+            <div class="form-group">
+            <label="confirm-password">Confirm Password</label><br><br>
+            <div class="password-container">
+            <input type="password" placeholder="Confirm password" id="confirmPassword"><i class="fa-solid fa-eye" id="toggleConfirmPassword"></i>
+            </div><br><br>
+            <span id="confirmPasswordError" class="error"></span>
+            </div>
+            <button type="submit" class="submit-button">Register</button>
+            <p id="message" class="success"></p>
+        </form>
+        <div class="login-link">
+            <p>Already have an account? <a href="../log-in/log-in.html">Login here</a></p>
+        </div>
+    </div>
+    <script type="module" src="sign-up.js"></script>
+    </body>
+</html>

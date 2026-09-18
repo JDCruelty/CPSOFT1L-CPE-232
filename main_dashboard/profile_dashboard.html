@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="profile_dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <!-- =====================================
+    SIDEBAR
+    ===================================== -->
+    <aside class="sidebar">
+        <div class="dashboard-logo">
+            <i class="fa-solid fa-laptop-code"></i>
+            <span>Web Application</span>
+        </div>
+        <nav>
+            <a href="main_dashboard.html">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Reports</span>
+            </a>
+            <a href="profile_dashboard.html" class="active">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+        <!-- Logout -->
+        <button class="logout-button" type="button" id="logoutButton">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </button>
+    </aside>
+
+    <!-- =====================================
+    MAIN CONTENT
+    ===================================== -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <h1>My Profile</h1>
+            <p>Manage your personal and contact information.</p>
+        </header>
+
+        <section class="profile-container">
+            <form id="profileForm">
+                <!-- Personal Information -->
+                <div class="profile-section">
+                    <h2>
+                        <i class="fa-solid fa-user"></i>
+                        Personal Information
+                    </h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="givenName">Given Name</label>
+                            <input id="givenName" type="text" placeholder="e.g., Juan">
+                            <span id="givenNameError" class="error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="middleName">Middle Name</label>
+                            <input id="middleName" type="text" placeholder="e.g., Santos">
+                            <span id="middleNameError" class="error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Surname</label>
+                            <input id="surname" type="text" placeholder="e.g., Dela Cruz">
+                            <span id="surnameError" class="error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthdate">Birthdate</label>
+                            <input id="birthdate" type="date">
+                            <span id="birthdateError" class="error"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="profile-section">
+                    <h2>
+                        <i class="fa-solid fa-address-book"></i>
+                        Contact Information
+                    </h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input id="email" type="email" readonly>
+                            <small>Email is managed by your Firebase account.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobileNumber">Mobile Number</label>
+                            <input id="mobileNumber" type="tel" maxlength="11" inputmode="numeric" placeholder="e.g., 09171234567">
+                            <span id="mobileNumberError" class="error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="alternativeContact">Alternative Contact Number</label>
+                            <input id="alternativeContact" type="tel" maxlength="11" inputmode="numeric" placeholder="e.g., 09221234567">
+                            <span id="alternativeContactError" class="error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="emergencyContactName">Emergency Contact Name</label>
+                            <input id="emergencyContactName" type="text" placeholder="e.g., Maria Dela Cruz">
+                        </div>
+                        <div class="form-group">
+                            <label for="emergencyContactNumber">Emergency Contact Number</label>
+                            <input id="emergencyContactNumber" type="tel" maxlength="11" inputmode="numeric" placeholder="e.g., 09181234567">
+                            <span id="emergencyContactNumberError" class="error"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="profile-section">
+                    <h2>
+                        <i class="fa-solid fa-location-dot"></i>
+                        Address
+                    </h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="blockLot">Block / Lot</label>
+                            <input id="blockLot" type="text" placeholder="e.g., Block 12 Lot 8">
+                            <span id="blockLotError" class="error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="barangay">Barangay</label>
+                            <input id="barangay" type="text" placeholder="e.g., San Jose">
+                            <span id="barangayError" class="error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City / Municipality</label>
+                            <input id="city" type="text" placeholder="e.g., Rodriguez">
+                            <span id="cityError" class="error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="province">Province</label>
+                            <input id="province" type="text" placeholder="e.g., Rizal">
+                            <span id="provinceError" class="error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="postalCode">ZIP / Postal Code</label>
+                            <input id="postalCode" type="text" maxlength="4" inputmode="numeric" placeholder="e.g., 1860">
+                            <span id="postalCodeError" class="error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input id="country" type="text" value="Philippines" placeholder="e.g., Philippines">
+                            <span id="countryError" class="error"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <button type="submit" class="save-button">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Save Profile
+                    </button>
+                    <p id="profileMessage" class="profile-message"></p>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script type="module" src="profile_dashboard.js"></script>
+</body>
+</html>
