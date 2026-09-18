@@ -1,37 +1,46 @@
-import { auth, db } from "../firebase/firebase-config.js";
-import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
-import { ref, set } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
+import {auth, db} from "../firebase/firebase-config.js";
+import {createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+import {ref, set} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
+
 const form = document.getElementById("myForm");
 
 form.addEventListener("submit", async function(event) {
     event.preventDefault();
-    // validation...
-    // Get values
+    // ==========================================
+    // GET VALUES
+    // ==========================================
     let username = document.getElementById("username").value.trim();
     let email = document.getElementById("email").value.trim();
     let password = document.getElementById("password").value;
     let confirmPassword = document.getElementById("confirmPassword").value;
     
-    //Clear previous message
+    // ==========================================
+    // CLEAR PREVIOUS MESSAGES
+    // ==========================================
     document.getElementById("usernameError").textContent = "";
-    //Remove previous borders
+    document.getElementById("emailError").textContent = "";
+    document.getElementById("passwordError").textContent = "";
+    document.getElementById("confirmPasswordError").textContent = "";
+    document.getElementById("message").textContent = "";
+
+    // Remove previous borders
     document.getElementById("username").classList.remove("error-border", "success-border");
     document.getElementById("email").classList.remove("error-border", "success-border");
     document.getElementById("password").classList.remove("error-border", "success-border");
     document.getElementById("confirmPassword").classList.remove("error-border", "success-border");
     let valid = true;
 
-    //Username validation
+    // ==========================================
+    // USERNAME VALIDATION
+    // ==========================================
     if (username === "") {
         document.getElementById("usernameError").textContent = "Username is required.";
-        valid = false;
-    
         document.getElementById("username").classList.add("error-border");
-
-        valid = false;
     }
 
-    //Email validation
+    // ==========================================
+    // EMAIL VALIDATION
+    // ==========================================
     if (email === "") {
         document.getElementById("emailError").textContent = "Email is required.";
         document.getElementById("email").classList.add("error-border");
@@ -45,7 +54,9 @@ form.addEventListener("submit", async function(event) {
         }
     }
 
-    //Password validation
+    // ==========================================
+    // PASSWORD VALIDATION
+    // ==========================================
     if (password === "") {
         document.getElementById("passwordError").textContent = "Password is required.";
         document.getElementById("password").classList.add("error-border");
@@ -56,7 +67,9 @@ form.addEventListener("submit", async function(event) {
         valid = false;
     }
 
-    //Confirm Password validation
+    // ==========================================
+    // CONFIRM PASSWORD VALIDATION
+    // ==========================================
     if (confirmPassword === "") {
         document.getElementById("confirmPasswordError").textContent = "Please confirm your password.";
         document.getElementById("confirmPassword").classList.add("error-border");
@@ -67,25 +80,31 @@ form.addEventListener("submit", async function(event) {
         valid = false;
     }
 
-    //Success
+    // ==========================================
+    // FIREBASE REGISTRATION
+    // ==========================================
     if (valid) {
         try {
-            // Create firebase acccount
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            // Get firebase user
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
             const user = userCredential.user;
-            // Store user information
-            await set(ref(db, 'users/' + user.uid), 
-            {
+
+            await set(ref(db, "users/" + user.uid), {
                 username: username,
                 email: email,
                 createdAt: new Date().toISOString()
             });
-            // Success
+
             alert("User created successfully!");
+            window.location.href = "../log-in/log-in.html";
+            form.reset();
         } catch (error) {
             console.error(error);
-            // Firebase error
+
             if (error.code === "auth/email-already-in-use") {
                 document.getElementById("emailError").textContent = "Email is already registered.";
             } else if (error.code === "auth/invalid-email") {
@@ -93,16 +112,16 @@ form.addEventListener("submit", async function(event) {
             } else if (error.code === "auth/weak-password") {
                 document.getElementById("passwordError").textContent = "Password is too weak.";
             } else {
-            alert("Registration failed. Please try again.");
+                alert("Registration failed. Please try again.");
             }
+
+            return;
         }
-        // Form is valid, you can submit it or perform further actions
-        alert("Registration successful!");
-        window.location.href = "../log-in/log-in.html"; // Redirect to login page
-        form.reset();    
     }
 
-    // Show/Hide Password
+    // ==========================================
+    // SHOW / HIDE PASSWORD
+    // ==========================================
     const togglePassword = document.getElementById("togglePassword");
     const passwordField = document.getElementById("password");
     togglePassword.addEventListener("click", function() {
